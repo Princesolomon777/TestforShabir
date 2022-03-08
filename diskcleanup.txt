@@ -1,0 +1,30 @@
+$Computers = Get-Content C:\Users\AP_VN11697\Documents\servers.txt
+$ErrorActionPreference = 'SilentlyContinue'
+foreach($Computer in $computers)
+{
+$RPCtest = Test-Path -path \\$computer\c$\ -ErrorAction SilentlyContinue 
+
+If  (-not $RPCtest)
+{
+
+Write-Output "$computer C drive inaccessible" >> C:\Users\AP_VN11697\Documents\Cdriveinaccessible.txt
+}
+
+else
+
+{
+
+
+Clear-Content \\$computer\C$\Windows\Temp\vminst.log
+Stop-Service wuauserv
+Remove-item \\na901276-sal\c$\Windows\SoftwareDistribution\* -force -Recurse -ErrorAction Ignore
+Remove-item \\$computer\C$\Windows\Temp\* -force -Recurse -ErrorAction Ignore
+Remove-item \\$computer\c$\Windows\ccmcache\* | Where { $_.LastWriteTime -lt (Get-date).AddDays(-30)} -force -Recurse -ErrorAction Ignore
+Remove-item \\$computer\C$\Temp\* -Exclude TreeSizeFree.exe, *july*, *windows* -force -Recurse -ErrorAction Ignore
+Start-Service wuauserv
+Get-Service -ComputerName $Computer wuauserv
+Get-WMIObject Win32_LogicalDisk -Filter "DeviceID='C:'" -Computer $Computer  | Select SystemName, DeviceID, @{Name="TotalSize(GB)"; Expression={"{0:N1}" -F ($_.Size/1GB)}}, @{Name="FreeSpace(GB)"; Expression={"{0:N1}" -F ($_.Freespace/1GB)}}, @{Name="FreeSpace%"; Expression={"{0:N1}" -F (($_.Freespace/$_.Size)*100)}} | FT -AutoSize
+
+
+}
+}
