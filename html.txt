@@ -1,0 +1,24 @@
+$myhtml = "
+<html>
+<head>
+<title>HTML TABLE</title>
+</head>
+<body>
+<table border = 1 > 
+<!-- <colgroup><col/><col/><col/><col/></colgroup> -->
+<tr><th>Serversthatneededconsolidation</th><th>serverswithoutsnapshot</th><th>serversthatsucceededconsolidation</th><th>serversthatfailedconsolidation</th></tr>
+<tr><td>gvx0wi3db01p</td><td>gvx0wi3db01p</td><td>gvx0lmule07p</td><td>gvx0lcmdmx01p</td></tr>
+<tr><td>gvx0wcopd10s</td><td>gvx0wcopd10s</td><td>gvx0wcopd07q</td><td>gvx0lmubs10s</td></tr>
+<tr><td>gvx0wcopd07q</td><td>gvx0wcopd07q</td><td>gvx0wcopd10s</td><td>gvx0lmule14p</td></tr>
+<tr><td>usgvahbi01</td><td>usgvahbi01</td><td>gvx0wi3db01p</td><td>gvx0lmule15p</td></tr>
+<tr><td>gvx0lmule07p</td><td>gvx0lmule07p</td><td>usgvahbi01</td><td>S0ADCXENCTX7</td></tr>
+<tr><td>gvx0lcmdmx01p</td><td>gvx0lcmdmx01p</td><td></td><td></td></tr>
+<tr><td>S0ADCXENCTX7</td><td>S0ADCXENCTX7</td><td></td><td></td></tr>
+<tr><td>gvx0lmubs10s</td><td>gvx0lmubs10s</td><td></td><td></td></tr>
+<tr><td>gvx0lmule14p</td><td>gvx0lmule14p</td><td></td><td></td></tr>
+<tr><td>gvx0lmule15p</td><td>gvx0lmule15p</td><td></td><td></td></tr>
+</table>
+</body></html>"
+
+$myhtml | Out-File C:\temp\myhtml.html
+
